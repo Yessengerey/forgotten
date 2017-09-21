@@ -38,15 +38,15 @@ class Storyline extends React.Component {
           } else {
             messageText = storyline[i].message.replace('[playerName]', 'friend');
           }
-          if (storyline[i].story) {
-            var storyText = '';
-            if (username) {
-              storyText = storyline[i].story.replace('[playerName]', username);
-            } else {
-              storyText = storyline[i].story.replace('[playerName]', 'friend');
-            }
-            let domStory = <div className={styles.story}>{storyText}</div>;
-            chronologicalOrder.push(domStory);
+          let domMessage = <div className={styles.message}>{messageText}</div>;
+          chronologicalOrder.push(domMessage);
+        }
+        if (storyline[i].story) {
+          var storyText = '';
+          if (username) {
+            storyText = storyline[i].story.replace('[playerName]', username);
+          } else {
+            storyText = storyline[i].story.replace('[playerName]', 'friend');
           }
           let domStory = <div className={styles.story}>{storyText}</div>;
           chronologicalOrder.push(domStory);
@@ -60,11 +60,12 @@ class Storyline extends React.Component {
             } else {
               receivedItems += storyline[i].items[0][k] + ', ';
             }
-            let domItems = <div className={styles.notifications}>{receivedItems}</div>;
-            chronologicalOrder.push(domItems);
           }
+          let domItems = <div className={styles.notifications}>{receivedItems}</div>;
+          chronologicalOrder.push(domItems);
         }
       }
+
       this.setState({
         storyline: chronologicalOrder
       });
